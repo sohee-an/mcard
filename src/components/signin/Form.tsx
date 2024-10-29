@@ -1,26 +1,27 @@
-import FixedBottomButton from '@components/share/FixedBottomButton';
+import Button from '@components/share/Button';
 import Flex from '@components/share/Flex';
 import Spacing from '@components/share/Spacing';
+import Text from '@components/share/Text';
 import TextField from '@components/share/TextLabel';
 import { css } from '@emotion/react';
-import { IFormValues } from '@models/signup';
+import { ISigninValues } from '@models/signin';
 import { ChangeEvent, useCallback, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { colors } from 'src/styles/colorPalette';
 import { validate } from 'src/validation/signup';
 
 const initValue = {
   email: '',
   password: '',
-  rePassword: '',
-  name: '',
 };
 
 type TProps = {
-  onSubmit: (formValues: IFormValues) => void;
+  onSubmit: (formValues: ISigninValues) => void;
 };
 
 function Form({ onSubmit }: TProps) {
-  const [formValues, setFormValues] = useState<IFormValues>(initValue);
-  const [dirty, setDirty] = useState<IFormValues>(initValue);
+  const [formValues, setFormValues] = useState(initValue);
+  const [dirty, setDirty] = useState(initValue);
 
   const handleFormValues = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setFormValues((prevFormValues) => ({
@@ -28,6 +29,7 @@ function Form({ onSubmit }: TProps) {
       [e.target.name]: e.target.value,
     }));
   }, []);
+
   const handleBlur = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setDirty((prevDirty) => ({
       ...prevDirty,
@@ -35,7 +37,7 @@ function Form({ onSubmit }: TProps) {
     }));
   }, []);
 
-  const errors = useMemo(() => validate(formValues, 'signup'), [formValues]);
+  const errors = useMemo(() => validate(formValues, 'signin'), [formValues]);
   const isValidation = Object.keys(errors).length === 0;
 
   return (
@@ -62,42 +64,35 @@ function Form({ onSubmit }: TProps) {
         helpMessage={Boolean(dirty.password) ? errors.password : ''}
         onBlur={handleBlur}
       />
-      <Spacing size={16} />
-      <TextField
-        label="패드워드 재확인"
-        name="rePassword"
-        type="password"
-        value={formValues.rePassword}
-        onChange={handleFormValues}
-        hasError={Boolean(dirty.rePassword) && Boolean(errors.rePassword)}
-        helpMessage={Boolean(dirty.rePassword) ? errors.rePassword : ''}
-        onBlur={handleBlur}
-      />
-      <Spacing size={16} />
-      <TextField
-        label="이름"
-        name="name"
-        placeholder="이름을 적어주세요"
-        value={formValues.name}
-        onChange={handleFormValues}
-        hasError={Boolean(dirty.name) && Boolean(errors.name)}
-        helpMessage={Boolean(dirty.name) ? errors.name : ''}
-        onBlur={handleBlur}
-      />
-      <Spacing size={16} />
-      <FixedBottomButton
+
+      <Spacing size={20} />
+      <Button
+        size="medium"
         disabled={isValidation === false}
-        label="회원가입"
         onClick={() => {
           onSubmit(formValues);
         }}
-      />
+      >
+        로그인
+      </Button>
+      <Spacing size={12} />
+      <Link to="/signup" css={linkStyles}>
+        <Text typography="t7">아직 계정이 없으신가요 ?</Text>
+      </Link>
     </Flex>
   );
 }
 
 const formContainerStyles = css`
   padding: 24px;
+`;
+
+const linkStyles = css`
+  text-align: center;
+
+  & > span:hover {
+    color: ${colors.blue};
+  }
 `;
 
 export default Form;
