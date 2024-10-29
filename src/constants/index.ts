@@ -1,4 +1,5 @@
 export const COLLECTIONS = {
   CARD: 'CARD',
   ADBANNER: 'ADDBANNER',
-} as const
+  USER: 'USER',
+} as const;

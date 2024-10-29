@@ -1,7 +1,13 @@
-import React from 'react'
+import Form from '@components/signup/Form';
+import React from 'react';
 
 function Signin() {
-  return <div></div>
+  const handleSubmit = () => {};
+  return (
+    <div>
+      <Form onSubmit={handleSubmit} />
+    </div>
+  );
 }
 
-export default Signin
+export default Signin;

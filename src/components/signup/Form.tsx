@@ -14,14 +14,18 @@ const initValue = {
   name: '',
 };
 
-function Form() {
+type TProps = {
+  onSubmit: (formValues: IFormValues) => void;
+};
+
+function Form({ onSubmit }: TProps) {
   const [formValues, setFormValues] = useState<IFormValues>(initValue);
   const [dirty, setDirty] = useState<IFormValues>(initValue);
 
   const handleFormValues = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setFormValues((prevFormValues) => ({
       ...prevFormValues,
-      [e.target.name]: e.target.name,
+      [e.target.name]: e.target.value,
     }));
   }, []);
   const handleBlur = useCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -84,7 +88,9 @@ function Form() {
       <FixedBottomButton
         disabled={isValidation === false}
         label="회원가입"
-        onClick={() => {}}
+        onClick={() => {
+          onSubmit(formValues);
+        }}
       />
     </Flex>
   );

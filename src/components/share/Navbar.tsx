@@ -1,14 +1,13 @@
-import React from 'react'
-import Flex from './Flex'
-import { Link, useLocation } from 'react-router-dom'
-import Button from './Button'
-import { css } from '@emotion/react'
-import { colors } from 'src/styles/colorPalette'
+import Flex from './Flex';
+import { Link, useLocation } from 'react-router-dom';
+import Button from './Button';
+import { css } from '@emotion/react';
+import { colors } from 'src/styles/colorPalette';
 
 function Navbar() {
-  const loaction = useLocation()
+  const location = useLocation();
   const showSignButton =
-    ['/signup', '/signin'].includes(location.pathname) === false
+    ['/signup', '/signin'].includes(location.pathname) === false;
   return (
     <Flex justify="space-between" align="center" css={navbarContainerStyles}>
       <Link to="/">홈</Link>
@@ -18,16 +17,17 @@ function Navbar() {
         </Link>
       ) : null}
     </Flex>
-  )
+  );
 }
 
 const navbarContainerStyles = css`
   padding: 10px 24px;
+  height: 27px;
   z-index: 10;
   position: sticky;
   top: 0;
   background-color: ${colors.white};
   border-bottom: 1px solid ${colors.grey};
-`
+`;
 
-export default Navbar
+export default Navbar;
