@@ -1,11 +1,11 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import HomePage from '@pages/Home'
-import TestPage from '@pages/Testpage'
-import Card from '@pages/Card'
-import ScrollToTop from '@components/share/ScrollToTop'
-import Signin from '@pages/Signin'
-import Navbar from '@components/share/Navbar'
-import Signup from '@pages/Signup'
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import HomePage from '@pages/Home';
+import TestPage from '@pages/Testpage';
+import Card from '@pages/Card';
+import ScrollToTop from '@components/share/ScrollToTop';
+import Signin from '@pages/Signin';
+import Navbar from '@components/share/Navbar';
+import Signup from '@pages/Signup';
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
         <Route path="/card/:id" Component={Card} />
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;
