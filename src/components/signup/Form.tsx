@@ -1,38 +1,38 @@
-import FixedBottomButton from '@components/share/FixedBottomButton'
-import Flex from '@components/share/Flex'
-import Spacing from '@components/share/Spacing'
-import TextField from '@components/share/TextLabel'
-import { css } from '@emotion/react'
-import { IFormValues } from '@models/signup'
-import { ChangeEvent, useCallback, useMemo, useState } from 'react'
-import { validate } from 'src/validation/signup'
+import FixedBottomButton from '@components/share/FixedBottomButton';
+import Flex from '@components/share/Flex';
+import Spacing from '@components/share/Spacing';
+import TextField from '@components/share/TextLabel';
+import { css } from '@emotion/react';
+import { IFormValues } from '@models/signup';
+import { ChangeEvent, useCallback, useMemo, useState } from 'react';
+import { validate } from 'src/validation/signup';
 
 const initValue = {
   email: '',
   password: '',
   rePassword: '',
   name: '',
-}
+};
 
 function Form() {
-  const [formValues, setFormValues] = useState<IFormValues>(initValue)
-  const [dirty, setDirty] = useState<IFormValues>(initValue)
+  const [formValues, setFormValues] = useState<IFormValues>(initValue);
+  const [dirty, setDirty] = useState<IFormValues>(initValue);
 
   const handleFormValues = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setFormValues((prevFormValues) => ({
       ...prevFormValues,
       [e.target.name]: e.target.name,
-    }))
-  }, [])
+    }));
+  }, []);
   const handleBlur = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setDirty((prevDirty) => ({
       ...prevDirty,
       [e.target.name]: 'true',
-    }))
-  }, [])
+    }));
+  }, []);
 
-  const errors = useMemo(() => validate(formValues), [formValues])
-  const isValidation = Object.keys(errors).length === 0
+  const errors = useMemo(() => validate(formValues), [formValues]);
+  const isValidation = Object.keys(errors).length === 0;
 
   return (
     <Flex direction="column" css={formContainerStyles}>
@@ -54,8 +54,8 @@ function Form() {
         type="password"
         value={formValues.password}
         onChange={handleFormValues}
-        hasError={Boolean(dirty.email) && Boolean(errors.password)}
-        helpMessage={Boolean(dirty.email) ? errors.password : ''}
+        hasError={Boolean(dirty.password) && Boolean(errors.password)}
+        helpMessage={Boolean(dirty.password) ? errors.password : ''}
         onBlur={handleBlur}
       />
       <Spacing size={16} />
@@ -65,8 +65,8 @@ function Form() {
         type="password"
         value={formValues.rePassword}
         onChange={handleFormValues}
-        hasError={Boolean(dirty.email) && Boolean(errors.rePassword)}
-        helpMessage={Boolean(dirty.email) ? errors.rePassword : ''}
+        hasError={Boolean(dirty.rePassword) && Boolean(errors.rePassword)}
+        helpMessage={Boolean(dirty.rePassword) ? errors.rePassword : ''}
         onBlur={handleBlur}
       />
       <Spacing size={16} />
@@ -76,8 +76,8 @@ function Form() {
         placeholder="이름을 적어주세요"
         value={formValues.name}
         onChange={handleFormValues}
-        hasError={Boolean(dirty.email) && Boolean(errors.name)}
-        helpMessage={Boolean(dirty.email) ? errors.name : ''}
+        hasError={Boolean(dirty.name) && Boolean(errors.name)}
+        helpMessage={Boolean(dirty.name) ? errors.name : ''}
         onBlur={handleBlur}
       />
       <Spacing size={16} />
@@ -87,11 +87,11 @@ function Form() {
         onClick={() => {}}
       />
     </Flex>
-  )
+  );
 }
 
 const formContainerStyles = css`
   padding: 24px;
-`
+`;
 
-export default Form
+export default Form;
