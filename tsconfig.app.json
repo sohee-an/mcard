@@ -7,6 +7,7 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@": ["src"],
       "@pages/*": ["src/pages/*"],
       "@share/*": ["src/components/share"],
       "@assets/*": ["src/assets/*"],
@@ -14,7 +15,9 @@
       "@models/*": ["src/models/*"],
       "@contexts/*": ["src/contexts/*"],
       "@constants/*": ["src/constants/*"],
-      "@remote/*": ["src/remote/*"]
+      "@remote/*": ["src/remote/*"],
+      "@atoms/*": ["src/atoms"],
+      "@hooks/*": ["src/hooks"]
     },
 
     /* Bundler mode */

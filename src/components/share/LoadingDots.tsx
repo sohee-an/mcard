@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { colors } from 'src/styles/colorPalette';
 
 const LoadingDots = () => {
-  // 애니메이션 설정
   const dropAnimation = {
     hidden: { opacity: 0, y: -50 },
     visible: (i: number) => ({

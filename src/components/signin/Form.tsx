@@ -42,39 +42,50 @@ function Form({ onSubmit }: TProps) {
 
   return (
     <Flex direction="column" css={formContainerStyles}>
-      <TextField
-        label="이메일"
-        type="email"
-        name="email"
-        placeholder="text@text.com"
-        value={formValues.email}
-        onChange={handleFormValues}
-        hasError={Boolean(dirty.email) && Boolean(errors.email)}
-        helpMessage={Boolean(dirty.email) ? errors.email : ''}
-        onBlur={handleBlur}
-      />
-      <Spacing size={16} />
-      <TextField
-        label="패스워드"
-        name="password"
-        type="password"
-        value={formValues.password}
-        onChange={handleFormValues}
-        hasError={Boolean(dirty.password) && Boolean(errors.password)}
-        helpMessage={Boolean(dirty.password) ? errors.password : ''}
-        onBlur={handleBlur}
-      />
-
-      <Spacing size={20} />
-      <Button
-        size="medium"
-        disabled={isValidation === false}
-        onClick={() => {
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
           onSubmit(formValues);
         }}
       >
-        로그인
-      </Button>
+        <TextField
+          label="이메일"
+          type="email"
+          name="email"
+          placeholder="text@text.com"
+          value={formValues.email}
+          onChange={handleFormValues}
+          hasError={Boolean(dirty.email) && Boolean(errors.email)}
+          helpMessage={Boolean(dirty.email) ? errors.email : ''}
+          onBlur={handleBlur}
+        />
+        <Spacing size={16} />
+        <TextField
+          label="패스워드"
+          name="password"
+          type="password"
+          value={formValues.password}
+          onChange={handleFormValues}
+          hasError={Boolean(dirty.password) && Boolean(errors.password)}
+          helpMessage={Boolean(dirty.password) ? errors.password : ''}
+          onBlur={handleBlur}
+        />
+
+        <Spacing size={20} />
+        <Button
+          type="submit"
+          size="medium"
+          css={formStyles}
+          //   style={{ width: '100%' }}
+          disabled={isValidation === false}
+          onClick={() => {
+            onSubmit(formValues);
+          }}
+        >
+          로그인
+        </Button>
+      </form>
+
       <Spacing size={12} />
       <Link to="/signup" css={linkStyles}>
         <Text typography="t7">아직 계정이 없으신가요 ?</Text>
@@ -85,6 +96,9 @@ function Form({ onSubmit }: TProps) {
 
 const formContainerStyles = css`
   padding: 24px;
+`;
+const formStyles = css`
+  width: 100%;
 `;
 
 const linkStyles = css`

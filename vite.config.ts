@@ -22,6 +22,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
+      '@': path.resolve(__dirname, './src'),
       '@pages': path.resolve(__dirname, 'src/pages'),
       '@share': path.resolve(__dirname, 'src/components/share'),
       '@components': path.resolve(__dirname, 'src/components'),
@@ -30,6 +31,8 @@ export default defineConfig({
       '@models': path.resolve(__dirname, 'src/models'),
       '@constants': path.resolve(__dirname, 'src/constants'),
       '@remote': path.resolve(__dirname, 'src/remote'),
+      '@atoms': path.resolve(__dirname, 'src/atoms'),
+      '@hooks': path.resolve(__dirname, 'src/hooks'),
     },
   },
 });
