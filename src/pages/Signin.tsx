@@ -5,18 +5,23 @@ import { useAlertContext } from '@contexts/AlertContext';
 import { FirebaseError } from 'firebase/app';
 import { firebaseAuthService } from 'src/api/auth';
 import { useMutation } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function Signin() {
   const navigate = useNavigate();
   const { open } = useAlertContext();
+  const { state } = useLocation();
 
   const { mutate } = useMutation({
     mutationKey: ['signin'],
     mutationFn: ({ email, password }: { email: string; password: string }) =>
       firebaseAuthService.signin({ email, password }),
     onSuccess: () => {
-      navigate('/');
+      if (state) {
+        navigate(state);
+      } else {
+        navigate('/');
+      }
     },
     onError: (error) => {
       const message =

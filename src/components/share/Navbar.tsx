@@ -10,6 +10,7 @@ import { auth } from '@remote/firebase';
 
 function Navbar() {
   const location = useLocation();
+
   const showSignButton =
     ['/signup', '/signin'].includes(location.pathname) === false;
 
@@ -20,12 +21,12 @@ function Navbar() {
 
   const renderButton = useCallback(() => {
     if (user != null) {
-      return <Button>로그아웃</Button>;
+      return <Button onClick={handleLogout}>로그아웃</Button>;
     }
     if (showSignButton) {
       return (
         <Link to="/signin">
-          <Button onClick={handleLogout}>로그인/회원가입</Button>
+          <Button>로그인/회원가입</Button>
         </Link>
       );
     }

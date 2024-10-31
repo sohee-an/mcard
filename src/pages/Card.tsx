@@ -1,34 +1,55 @@
-import { useParams } from 'react-router-dom'
-import { useQuery } from '@tanstack/react-query'
-import { getCard } from '@remote/card'
-import { css } from '@emotion/react'
-import Top from '@components/share/Top'
-import { removeHtmlTags } from 'src/utiles/removeHtmltags'
-import ListRow from '@components/share/ListRow'
-import CheckIcon from '@assets/icons/check.svg?react'
-import FixedBottomButton from '@components/share/FixedBottomButton'
-import Flex from '@components/share/Flex'
-import Text from '@components/share/Text'
-import { motion } from 'framer-motion'
+import { useNavigate, useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { getCard } from '@remote/card';
+import { css } from '@emotion/react';
+import Top from '@components/share/Top';
+import { removeHtmlTags } from 'src/utiles/removeHtmltags';
+import ListRow from '@components/share/ListRow';
+import CheckIcon from '@assets/icons/check.svg?react';
+import FixedBottomButton from '@components/share/FixedBottomButton';
+import Flex from '@components/share/Flex';
+import Text from '@components/share/Text';
+import { motion } from 'framer-motion';
+import useUser from 'src/hooks/auth/useUser';
+import { useCallback } from 'react';
+import { useAlertContext } from '@contexts/AlertContext';
+import { useLocation } from 'react-router-dom';
 
 function Card() {
-  const { id = '' } = useParams()
+  const { id = '' } = useParams();
+  const navigate = useNavigate();
+  const { open } = useAlertContext();
+  const { pathname } = useLocation();
+
+  const user = useUser();
 
   const { data } = useQuery({
     queryKey: ['card', id],
     queryFn: () => getCard(id),
     enabled: id !== '',
-  })
-  console.log('data', data)
+  });
+
+  const moveToApply = useCallback(() => {
+    if (user == null) {
+      open({
+        title: '로그인이 필요한 기능입니다.',
+        onButtonClick: () => {
+          navigate(`/signin`, { state: pathname });
+        },
+      });
+      return;
+    }
+    navigate(`/apply/${id}`);
+  }, [user, id, open, navigate]);
 
   if (data == null) {
-    return <div>데이터가 없습니다.</div>
+    return <div>데이터가 없습니다.</div>;
   }
 
-  const { name, corpName, promotion, tags, benefit } = data
+  const { name, corpName, promotion, tags, benefit } = data;
 
   const subTitle =
-    promotion != null ? removeHtmlTags(promotion.title) : tags.join(', ')
+    promotion != null ? removeHtmlTags(promotion.title) : tags.join(', ');
 
   return (
     <div>
@@ -61,7 +82,7 @@ function Card() {
                 }
               />
             </motion.li>
-          )
+          );
         })}
       </ul>
       {promotion != null ? (
@@ -70,14 +91,14 @@ function Card() {
           <Text typography="t7">{removeHtmlTags(promotion.terms)}</Text>
         </Flex>
       ) : null}
-      <FixedBottomButton label="신청하기" onClick={() => {}} />
+      <FixedBottomButton label="신청하기" onClick={moveToApply} />
     </div>
-  )
+  );
 }
 
 const termContainerStyles = css`
   margin-top: 80px;
   padding: 0 24px 80px 24px;
-`
+`;
 
-export default Card
+export default Card;

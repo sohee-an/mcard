@@ -1,17 +1,19 @@
-import styled from '@emotion/styled'
-import { CSSProperties } from 'react'
+import styled from '@emotion/styled';
+import { CSSProperties } from 'react';
 
 interface FlexProps {
-  align?: CSSProperties['alignItems']
-  justify?: CSSProperties['justifyContent']
-  direction?: CSSProperties['flexDirection']
+  align?: CSSProperties['alignItems'];
+  justify?: CSSProperties['justifyContent'];
+  direction?: CSSProperties['flexDirection'];
+  gap?: CSSProperties['gap'];
 }
 
-const Flex = styled.div<FlexProps>(({ align, justify, direction }) => ({
+const Flex = styled.div<FlexProps>(({ align, justify, direction, gap }) => ({
   display: 'flex',
   alignItems: align,
   justifyContent: justify,
   flexDirection: direction,
-}))
+  gap: gap,
+}));
 
-export default Flex
+export default Flex;

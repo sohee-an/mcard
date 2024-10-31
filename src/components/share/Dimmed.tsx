@@ -1,7 +1,7 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
 function Dimmed({ children }: { children: React.ReactNode }) {
-  return <Container>{children}</Container>
+  return <Container>{children}</Container>;
 }
 
 const Container = styled.div`
@@ -10,8 +10,8 @@ const Container = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(98, 96, 96, 0.9);
   z-index: var(--dimmed-zindex);
-`
+`;
 
-export default Dimmed
+export default Dimmed;
