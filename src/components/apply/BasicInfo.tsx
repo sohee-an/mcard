@@ -4,7 +4,7 @@ import Select from '@components/share/Selected';
 import { 연소득옵션, 신용점수옵션, 결제일옵션 } from '@constants/apply';
 import styled from '@emotion/styled';
 import { ApplyValues } from '@models/apply';
-import { ChangeEvent, useCallback, useState } from 'react';
+import { ChangeEvent, memo, useCallback, useState } from 'react';
 
 type InfoValues = Pick<ApplyValues, 'salary' | 'creditScore' | 'payDate'>;
 
@@ -65,10 +65,9 @@ function BasicInfo({ onNext }: { onNext: (values: InfoValues) => void }) {
 }
 
 const Container = styled.div`
-  padding: 20px 10px;
   display: flex;
   flex-direction: column;
   gap: 25px;
 `;
 
-export default BasicInfo;
+export default memo(BasicInfo);
