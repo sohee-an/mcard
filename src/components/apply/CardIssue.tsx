@@ -37,7 +37,6 @@ const messageStyle = (state: string) => css`
   color: ${state === 'true' ? colors.blue : colors.red};
   background-color: #fff;
   border-radius: 10px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
   animation: ${slideUpToCenter} 1s ease forwards;
 `;
 
