@@ -12,19 +12,12 @@ function ApplyDone() {
     <>
       <CardIssuedMessage state={success} />
 
-      {/* <div>
-      {success === 'true' ? (
-        <CardIssuedMessage />
-      ) : (
-        '카드 발급에 실패하였습니다.'
-      )}
-      </div>
       <FixedBottomButton
         label="확인"
         onClick={() => {
           window.history.back();
         }}
-      /> */}
+      />
     </>
   );
 }
